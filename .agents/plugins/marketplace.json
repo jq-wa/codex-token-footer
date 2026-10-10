@@ -1,0 +1,12 @@
+{
+  "name": "codex-token-footer-local",
+  "interface": { "displayName": "本地 Token 统计插件" },
+  "plugins": [
+    {
+      "name": "codex-token-footer",
+      "source": { "source": "local", "path": "./plugins/codex-token-footer" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

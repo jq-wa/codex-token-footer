@@ -1,0 +1,16 @@
+{
+  "name": "codex-token-footer",
+  "version": "0.1.1",
+  "description": "每轮回答结束后，从本机会话日志显示真实 token 用量。",
+  "license": "MIT",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "displayName": "Codex Token Footer",
+    "shortDescription": "回答结束后显示输入、输出、缓存命中率与本轮合计。",
+    "longDescription": "本地只读插件。使用 Stop hook 的聊天提示显示统计，不调用模型、不上传日志。提示的样式和位置由 Codex 决定，不修改原生回答底栏。",
+    "category": "Productivity",
+    "capabilities": ["Local", "Token usage"],
+    "brandColor": "#3478F6",
+    "logo": "./assets/icon.svg"
+  }
+}

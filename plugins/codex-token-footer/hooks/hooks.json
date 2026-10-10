@@ -1,0 +1,16 @@
+{
+  "description": "只读当前会话日志，在回答结束后显示 token 统计；不阻止结束、不触发续写。",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"require(require('node:path').join(process.env.PLUGIN_ROOT || process.env.CLAUDE_PLUGIN_ROOT, 'scripts', 'token-footer.cjs')).runHook()\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
