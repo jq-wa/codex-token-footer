@@ -12,28 +12,35 @@ Windows Codex 本地聊天的 Token 统计插件。当前版本 **0.2.0**，包�
 
 ## 安装和使用
 
-需要 Windows Codex 桌面应用、支持插件和 Stop hooks 的 Codex CLI，以及 **Node.js 22.13 或更新版本**（建议 Node.js 24）。桌面脚本使用 Node 内置 SQLite，无需安装第三方依赖。
+### 推荐：无需提前安装插件，直接显示复制栏统计
 
-1. 克隆本仓库或下载并解压安装包。
-2. 在仓库目录打开 PowerShell，运行：
+**第一次使用也不需要先安装 hook 插件或 Codex CLI。**完整安装包已经包含统计模块，桌面显示脚本可以直接读取本机会话日志并显示用量。
+
+1. 安装 **Windows Codex 桌面应用**和 [Node.js 24](https://nodejs.org/zh-cn/download)，先正常打开 Codex 一次。最低支持 Node.js 22.13；桌面脚本使用 Node 内置 SQLite，无需安装第三方依赖。
+2. 下载 [0.2.0 完整 ZIP 安装包](https://github.com/jq-wa/codex-token-footer/releases/download/v0.2.0/codex-token-footer-0.2.0.zip) 并解压，也可以克隆本仓库。
+3. 进入包含 `Install-DesktopToolbar.ps1` 的文件夹，在资源管理器地址栏输入 `powershell` 并回车，然后运行：
 
    ```powershell
-   powershell -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\Install-DesktopToolbar.ps1
    ```
 
-   这会安装 hook 插件和桌面显示脚本，并创建 **Codex Token统计** 桌面快捷方式。脚本复制到 `CODEX_HOME\token-toolbar`；未设置 `CODEX_HOME` 时位于用户目录下的 `.codex\token-toolbar`。后续运行无需保留下载的目录。
-3. 在 Codex CLI 中输入 `/hooks`，检查并信任 Codex Token Footer 的 Stop hook。安装脚本不会自动信任 hook。
+   这会安装桌面显示脚本和共用的统计模块，并创建 **Codex Token统计** 桌面快捷方式。脚本复制到 `CODEX_HOME\token-toolbar`；未设置 `CODEX_HOME` 时位于用户目录下的 `.codex\token-toolbar`。后续运行无需保留下载的目录。
 4. 关闭已有 Codex 桌面窗口，通过 **Codex Token统计** 快捷方式打开客户端。统计将出现在回答的“复制”按钮同一栏。
+5. 正常聊天，回答结束后查看统计。已有聊天只要日志中记录了用量，也可以恢复显示。
 
 桌面脚本使用独立的界面配置目录，但共享同一个 `CODEX_HOME` 的本地聊天数据；首次打开时可能需要重新设置界面偏好。只有通过该快捷方式启动的客户端会加载复制栏显示。回答仍在生成时，最终统计尚未完成；日志缺少用量时不估算数字。
 
-已安装 hook 插件，只补装或更新复制栏显示：
+已安装 hook 插件的用户也可以使用上述方式补装复制栏显示。更新前关闭通过统计快捷方式打开的 Codex，再安装并重新打开。
+
+### 可选：同时安装 Stop hook 插件
+
+如果还想启用 Codex 原生的钩子统计提示，需要额外安装支持插件和 Stop hooks 的 **Codex CLI**。在解压或克隆的仓库目录运行：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\Install-DesktopToolbar.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1
 ```
 
-更新前关闭通过统计快捷方式打开的 Codex，再安装并重新打开。
+此命令会同时安装 hook 插件和桌面显示脚本。然后在 Codex CLI 中输入 `/hooks`，检查并信任 Codex Token Footer 的 Stop hook；安装脚本不会自动信任 hook。关闭已有桌面窗口后，使用 **Codex Token统计** 快捷方式打开客户端。
 
 只安装 hook 插件，保留客户端原生显示方式：
 
